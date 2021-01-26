@@ -49,6 +49,10 @@ public class App {
       final DataRoot data = new DataRoot();
       storageManager.setRoot(data);
       storageManager.storeRoot();
+
+      data.add("initial message");
+    } else {
+      logger.info("loaded existing storage");
     }
 
     return storageManager;
@@ -79,6 +83,7 @@ public class App {
 
   public void shutdown() {
     storageManager().shutdown();
+    this.storageManager = null;
   }
 
   public void init(@Observes StartupEvent event) {
